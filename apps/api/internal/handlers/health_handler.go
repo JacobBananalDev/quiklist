@@ -1,10 +1,14 @@
 package handlers
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 )
 
 func HealthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Ready")
+	w.Header().Set("Content-Type", "application/json")
+
+	json.NewEncoder(w).Encode(map[string]string{
+		"status": "ok",
+	})
 }
