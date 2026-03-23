@@ -1,19 +1,20 @@
 package main
 
 import (
+	"log"
 	"fmt"
 	"net/http"
-	"github.com/jacobbananaldev/quiklist/internal/handlers"
+	"github.com/jacobbananaldev/quiklist/internal/router"
 )
 
 func main() {
+	r := router.NewRouter()
+	
+	fmt.Println("Server running on :8080")
 
-	http.HandleFunc("/health", handlers.HealthHandler)
-
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", r)
 
 	if err != nil {
-		fmt.Println("Issue connecting to server")
-		return
+		log.Fatalf("failed to start server: %v", err)
 	}
 }
