@@ -3,15 +3,12 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"github.com/jacobbananaldev/quiklist/internal/handlers"
 )
-
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Ready")
-}
 
 func main() {
 
-	http.HandleFunc("/health", healthHandler)
+	http.HandleFunc("/health", handlers.HealthHandler)
 
 	err := http.ListenAndServe(":8080", nil)
 
